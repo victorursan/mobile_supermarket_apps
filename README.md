@@ -37,5 +37,8 @@ A product will have the following fields:
 ### Main UI [Table]
 The after he logs in he will be prompted with a table of all the products, each cell will have the title and a thumbnail of the product.
 
+### Chart
+The user can see the most popular products in a chart of top 10.
+
 ### Product description
 When he selects a cell he will be prompted with a modal view which will have the title, picture, description, price.
