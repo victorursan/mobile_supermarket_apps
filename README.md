@@ -28,11 +28,11 @@ the user a confirmation mail.
 
 ### Product
 A product will have the following fields:
-    - title
-    - picture
-    - description
-    - price
-    - [future feature] map of the origin of the product
+- title
+- picture
+- description
+- price
+- [future feature] map of the origin of the product
 
 ### Main UI [Table]
 The after he logs in he will be prompted with a table of all the products, each cell will have the title and a thumbnail of the product.
