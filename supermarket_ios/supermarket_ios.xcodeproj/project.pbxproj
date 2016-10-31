@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		57A2B32D1DC7ED4400199F7D /* SupermarketTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A2B32C1DC7ED4400199F7D /* SupermarketTableView.swift */; };
 		57C021291DBD5E01000A420D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C021281DBD5E01000A420D /* AppDelegate.swift */; };
 		57C0212B1DBD5E01000A420D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C0212A1DBD5E01000A420D /* ViewController.swift */; };
 		57C0212E1DBD5E01000A420D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57C0212C1DBD5E01000A420D /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		57A2B32C1DC7ED4400199F7D /* SupermarketTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupermarketTableView.swift; sourceTree = "<group>"; };
 		57C021251DBD5E01000A420D /* supermarket_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = supermarket_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57C021281DBD5E01000A420D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		57C0212A1DBD5E01000A420D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +76,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		57A2B3291DC7ECB500199F7D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				57C0212A1DBD5E01000A420D /* ViewController.swift */,
+				57A2B32C1DC7ED4400199F7D /* SupermarketTableView.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		57A2B32A1DC7ECBF00199F7D /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		57A2B32B1DC7ECCA00199F7D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		57C0211C1DBD5E01000A420D = {
 			isa = PBXGroup;
 			children = (
@@ -97,8 +122,10 @@
 		57C021271DBD5E01000A420D /* supermarket_ios */ = {
 			isa = PBXGroup;
 			children = (
+				57A2B32B1DC7ECCA00199F7D /* Model */,
+				57A2B32A1DC7ECBF00199F7D /* View */,
 				57C021281DBD5E01000A420D /* AppDelegate.swift */,
-				57C0212A1DBD5E01000A420D /* ViewController.swift */,
+				57A2B3291DC7ECB500199F7D /* Controller */,
 				57C0212C1DBD5E01000A420D /* Main.storyboard */,
 				57C0212F1DBD5E01000A420D /* Assets.xcassets */,
 				57C021311DBD5E01000A420D /* LaunchScreen.storyboard */,
@@ -263,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57C0212B1DBD5E01000A420D /* ViewController.swift in Sources */,
+				57A2B32D1DC7ED4400199F7D /* SupermarketTableView.swift in Sources */,
 				57C021291DBD5E01000A420D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -514,6 +542,7 @@
 				57C0214F1DBD5E01000A420D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		57C021501DBD5E01000A420D /* Build configuration list for PBXNativeTarget "supermarket_iosTests" */ = {
 			isa = XCConfigurationList;
@@ -522,6 +551,7 @@
 				57C021521DBD5E01000A420D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		57C021531DBD5E01000A420D /* Build configuration list for PBXNativeTarget "supermarket_iosUITests" */ = {
 			isa = XCConfigurationList;
@@ -530,6 +560,7 @@
 				57C021551DBD5E01000A420D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
