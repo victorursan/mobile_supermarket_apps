@@ -15,6 +15,9 @@
 		57C021331DBD5E01000A420D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57C021311DBD5E01000A420D /* LaunchScreen.storyboard */; };
 		57C0213E1DBD5E01000A420D /* supermarket_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C0213D1DBD5E01000A420D /* supermarket_iosTests.swift */; };
 		57C021491DBD5E01000A420D /* supermarket_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C021481DBD5E01000A420D /* supermarket_iosUITests.swift */; };
+		57E4D0731DD0FC80000AB48D /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E4D0721DD0FC80000AB48D /* AddViewController.swift */; };
+		57E4D0751DD1035D000AB48D /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E4D0741DD1035D000AB48D /* Product.swift */; };
+		57E4D0771DD1111D000AB48D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E4D0761DD1111D000AB48D /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		57C021441DBD5E01000A420D /* supermarket_iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = supermarket_iosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		57C021481DBD5E01000A420D /* supermarket_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = supermarket_iosUITests.swift; sourceTree = "<group>"; };
 		57C0214A1DBD5E01000A420D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		57E4D0721DD0FC80000AB48D /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		57E4D0741DD1035D000AB48D /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		57E4D0761DD1111D000AB48D /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +87,8 @@
 			children = (
 				57C0212A1DBD5E01000A420D /* ViewController.swift */,
 				57A2B32C1DC7ED4400199F7D /* SupermarketTableView.swift */,
+				57E4D0721DD0FC80000AB48D /* AddViewController.swift */,
+				57E4D0761DD1111D000AB48D /* DetailViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -95,6 +103,7 @@
 		57A2B32B1DC7ECCA00199F7D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				57E4D0741DD1035D000AB48D /* Product.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -215,7 +224,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Victor Ursan";
 				TargetAttributes = {
 					57C021241DBD5E01000A420D = {
@@ -291,6 +300,9 @@
 			files = (
 				57C0212B1DBD5E01000A420D /* ViewController.swift in Sources */,
 				57A2B32D1DC7ED4400199F7D /* SupermarketTableView.swift in Sources */,
+				57E4D0751DD1035D000AB48D /* Product.swift in Sources */,
+				57E4D0771DD1111D000AB48D /* DetailViewController.swift in Sources */,
+				57E4D0731DD0FC80000AB48D /* AddViewController.swift in Sources */,
 				57C021291DBD5E01000A420D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -364,6 +376,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -392,6 +405,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0.1;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -414,6 +428,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -434,6 +449,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0.1;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
