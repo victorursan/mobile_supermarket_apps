@@ -11,34 +11,41 @@ import {
   TouchableHighlight,
 } from 'react-native'
 
+import SupermarketListView from './SupermarketListView.js'
+import AddElementView from './AddElementView.js'
+import DescribeElementView from './DescribeElementView.js'
 
 export default class supermarket_react extends Component {
+  constructor(props) {
+    super(props);
+    this.store = [
+     { "identifier": "123", "name": "ceva", "price": "123.123", "description": "asd"},
+     { "identifier": "124", "name": "cev", "price": "321.1", "description": "asd3"},
+     { "identifier": "125", "name": "ve", "price": "123", "description": "asd2"},
+     { "identifier": "126", "name": "a", "price": "33", "description": "asd1"},
+   ];
+  }
+  renderScene (route, navigator) {
+    return <route.component {...route.passProps} navigator={navigator}/>
+  }
+
   render() {
   const routes = [
-    {title: 'First Scene', index: 0},
-    {title: 'Second Scene', index: 1},
+    {component: SupermarketListView, title: "List Supermarket", passProps: {store: this.store}, index: 0},
+    {component: AddElementView, title: "Add Product", passProps: {store: this.store}, index: 1},
   ];
   return (
     <Navigator
       initialRoute={routes[0]}
       initialRouteStack={routes}
-      renderScene={(route, navigator) =>
-        <TouchableHighlight onPress={() => {
-          if (route.index === 0) {
-            navigator.push(routes[1]);
-          } else {
-            navigator.pop();
-          }
-        }}>
-        <Text>Hello {route.title}!</Text>
-        </TouchableHighlight>
-      }
+      renderScene={this.renderScene}
+      
       navigationBar={
         <Navigator.NavigationBar
           routeMapper={{
             LeftButton: (route, navigator, index, navState) => {  
               if (route.index === 0) {
-                  return;
+                  return null;
               } else {
                   return (
                     <TouchableHighlight onPress={() => navigator.pop()}>
@@ -52,13 +59,10 @@ export default class supermarket_react extends Component {
                       <Text>+</Text>
                     </TouchableHighlight>);
               } else {
-                return (
-                    <TouchableHighlight onPress={() => navigator.pop()}>
-                      <Text>-</Text>
-                    </TouchableHighlight>);
+                return null;
               }},
          Title: (route, navigator, index, navState) =>
-           { return (<Text>Awesome Nav Bar</Text>); },
+           { return (<Text>{route.title}</Text>); },
        }}
        style={{backgroundColor: 'gray'}}
      />
@@ -70,30 +74,7 @@ export default class supermarket_react extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-  wrapper: {
-    borderRadius: 5,
-    marginBottom: 5,
-  },
-  button: {
-    backgroundColor: '#eeeeee',
-    padding: 10,
-  },
+  
 });
 
 AppRegistry.registerComponent('supermarket_react', () => supermarket_react);
