@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MessageUI
 
-class AddViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
+class AddViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, MFMailComposeViewControllerDelegate {
   
   @IBOutlet weak var identifierTextField: UITextField!
   @IBOutlet weak var nameTextField: UITextField!
@@ -40,10 +41,40 @@ class AddViewController: UIViewController, UITextFieldDelegate, UITextViewDelega
       if let parent = navigationController?.viewControllers[0] as? SupermarketTableView {
         let product = Product(identifier: identifier, name: prodName, price: prodPrice, description: prodDescription)
         parent.addProduct(product)
+        let mailComposeViewController = configuredMailComposeViewController(message: "Elements:\(parent.elements)\nAdded element:\n\(product)")
+        if MFMailComposeViewController.canSendMail() {
+          self.present(mailComposeViewController, animated: true, completion: nil)
+        } else {
+          self.showSendMailErrorAlert()
+        }
         let _ = navigationController?.popViewController(animated: true)
       }
     }
   }
+  
+  func configuredMailComposeViewController(message: String) -> MFMailComposeViewController {
+    let mailComposerVC = MFMailComposeViewController()
+    mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
+    
+    mailComposerVC.setToRecipients(["victor.ursan@gmail.com"])
+    mailComposerVC.setSubject("ChangesMade")
+    mailComposerVC.setMessageBody(message, isHTML: false)
+    
+    return mailComposerVC
+  }
+  
+  func showSendMailErrorAlert() {
+    let alert = UIAlertController(title: "Alert", message: "Could Not Send email", preferredStyle: UIAlertControllerStyle.alert)
+    alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+    self.present(alert, animated: true, completion: nil)
+  }
+  
+  // MARK: MFMailComposeViewControllerDelegate
+  
+  func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+    controller.dismiss(animated: true, completion: nil)
+  }
+  
   /*
    // MARK: - Navigation
    

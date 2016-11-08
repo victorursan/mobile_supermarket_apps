@@ -39,7 +39,6 @@ import DescribeElementView from './DescribeElementView'
     });
   }
 
-//     {component: DescribeElementView, title: "Describe Product", passProps: {store: this.store}, index: 2},
   render() {
     return (
       <ListView
@@ -50,10 +49,9 @@ import DescribeElementView from './DescribeElementView'
             onPress={() => this.props.navigator.push({component: DescribeElementView, title: "Describe Product", passProps: {store: this.props.store, element: data, navigator: this.props.navigator}, index: 2})}
             style={styles.containerRow}>
           <Text style={styles.text}>
-            name: {`${data.name}`} price: {`${data.price}`}
+            Name: {data.name}   Price: {data.price}
           </Text>
-          </TouchableHighlight>)}
-      />
+          </TouchableHighlight>)}/>
     )
   }
 }
