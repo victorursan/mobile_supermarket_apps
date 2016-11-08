@@ -25,10 +25,10 @@ import DescribeElementView from './DescribeElementView'
      var i = nextProps.store.length;
      while ( i --> 0 ) {
         var newItem = {}
-        newItem["identifier"] = nextProps.store[i].identifier;
-        newItem["name"] = nextProps.store[i].name;
-        newItem["price"] = nextProps.store[i].price;
-        newItem["description"] = nextProps.store[i].description;
+        newItem.identifier = nextProps.store[i].identifier;
+        newItem.name = nextProps.store[i].name;
+        newItem.price = nextProps.store[i].price;
+        newItem.description = nextProps.store[i].description;
         newItems.push(newItem);
     }
     this.setState({
@@ -50,7 +50,7 @@ import DescribeElementView from './DescribeElementView'
             onPress={() => this.props.navigator.push({component: DescribeElementView, title: "Describe Product", passProps: {store: this.props.store, element: data, navigator: this.props.navigator}, index: 2})}
             style={styles.containerRow}>
           <Text style={styles.text}>
-            {`${data.name} ${data.price}`}
+            name: {`${data.name}`} price: {`${data.price}`}
           </Text>
           </TouchableHighlight>)}
       />
@@ -61,12 +61,13 @@ import DescribeElementView from './DescribeElementView'
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 0,
+    top: 50,
     marginLeft: 0
   },
   containerRow: {
     padding: 10,
-    marginLeft: 0
+    marginLeft: -10,
+    width: 500 
   },
   text: {
     marginLeft: 0,

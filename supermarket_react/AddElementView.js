@@ -4,6 +4,7 @@ import {
   TextInput,
   Text,
   TouchableHighlight,
+  StyleSheet,
 } from 'react-native'
 
 class AddElementView extends Component {
@@ -19,32 +20,50 @@ class AddElementView extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <Text>Product</Text>
           <View>
             <Text>identifier</Text>
-            <TextInput style={{height: 60 }} value={this.state.identifier}
+            <TextInput style={styles.textInput} value={this.state.identifier}
                   onChangeText={(identifier) => this.setState({identifier})}/>
              <Text>name</Text>
-             <TextInput style={{height: 60 }} value={this.state.name}
+             <TextInput style={styles.textInput} value={this.state.name}
                   onChangeText={(name) => this.setState({name})}/>
             <Text>price</Text>
-             <TextInput style={{height: 60 }} value={this.state.price}
+             <TextInput style={styles.textInput} value={this.state.price}
                   onChangeText={(price) => this.setState({price})}/>
             <Text>description</Text>
-             <TextInput style={{height: 60 }} value={this.state.description}
+             <TextInput style={styles.textInput} value={this.state.description}
                   onChangeText={(description) => this.setState({description})}/>
           </View>
           <View>
-            <TouchableHighlight style={{height: 60 }} onPress={() => {}}>
-           <Text>
-             Add
-           </Text>
+            <TouchableHighlight style={{height: 60 }} onPress={() => {
+                this.addElement()
+                this.props.navigator.pop()}}>
+           <Text>Add</Text>
            </TouchableHighlight>
           </View>
         </View>
     )
   }
+  
+  addElement() {
+     var newItem = {}
+        newItem.identifier = this.state.identifier
+        newItem.name = this.state.name
+        newItem.price = this.state.price
+        newItem.description = this.state.description
+         this.props.store.push(newItem);
+  }
 }
-
+const styles = StyleSheet.create({
+  container: {
+    top: 50,
+    marginLeft: 0
+  },
+ textInput: {
+    height: 60,
+    marginLeft: 0,
+  },
+  });
 export default AddElementView

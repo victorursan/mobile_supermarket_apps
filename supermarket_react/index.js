@@ -67,7 +67,7 @@ export default class supermarket_react extends Component {
        style={{backgroundColor: 'gray'}}
      />
   }
-      style={{padding: 100}}
+      style={{padding: 10}}
     />
   );
 }
