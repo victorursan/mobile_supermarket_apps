@@ -65,10 +65,8 @@ export default class supermarket_react extends Component {
            { return (<Text style={styles.text}>{route.title}</Text>); },
        }}
        style={{backgroundColor: 'gray'}}
-     />
-  }
-      style={{padding: 10}}
-    />
+     />}
+      style={{padding: 10}}/>
   );
 }
 }

@@ -44,6 +44,7 @@ import DescribeElementView from './DescribeElementView'
       <ListView
         style={styles.container}
         dataSource={this.state.dataSource}
+        renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator}/>}
         renderRow={(data) => 
          ( <TouchableHighlight 
             onPress={() => this.props.navigator.push({component: DescribeElementView, title: "Describe Product", passProps: {store: this.props.store, element: data, navigator: this.props.navigator}, index: 2})}
@@ -70,6 +71,11 @@ const styles = StyleSheet.create({
   text: {
     marginLeft: 0,
     fontSize: 16,
+  },
+  separator: {
+    flex: 1,
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: '#8E8E8E',
   },
 });
 

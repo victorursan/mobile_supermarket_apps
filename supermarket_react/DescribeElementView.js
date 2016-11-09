@@ -24,30 +24,30 @@ class DescribeElementView extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Product</Text>
+        <Text style={styles.text}>Product</Text>
           <View>
-            <Text>identifier</Text>
+            <Text style={styles.text}>identifier</Text>
             <TextInput editable={this.state.edit} style={styles.textInput} value={this.state.identifier}
                   onChangeText={(identifier) => this.setState({identifier})}/>
-             <Text>name</Text>
+             <Text style={styles.text}>name</Text>
              <TextInput editable={this.state.edit} style={styles.textInput} value={this.state.name}
                   onChangeText={(name) => this.setState({name})}/>
-            <Text>price</Text>
+            <Text style={styles.text}>price</Text>
              <TextInput editable={this.state.edit} style={styles.textInput} value={this.state.price}
                   onChangeText={(price) => this.setState({price})}/>
-            <Text>description</Text>
+            <Text style={styles.text}>description</Text>
              <TextInput editable={this.state.edit} style={styles.textInput} value={this.state.description}
                   onChangeText={(description) => this.setState({description})}/>
           </View>
           <View>
-            <TouchableHighlight style={{height: 60 }} onPress={() => {
+            <TouchableHighlight style={styles.button} onPress={() => {
                 if (this.state.edit) {
                   this.updateElement()
                   this.props.navigator.pop()
                 }
                 this.setState({edit: true})
                 this.setState({value: 'Save'})}}>
-           <Text>{this.state.value}</Text>
+           <Text style={{color: 'white'}}>{this.state.value}</Text>
            </TouchableHighlight>
           </View>
         </View>
@@ -74,8 +74,22 @@ const styles = StyleSheet.create({
     marginLeft: 0
   },
   textInput: {
-    height: 60,
+    height: 30,
     marginLeft: 0,
+    borderWidth: 1,
+    borderRadius: 3,
+  },
+  button: {
+    top: 10,
+    backgroundColor: 'blue',
+    height: 30,
+    flex: 1,
+  },
+  text: {
+    marginLeft: 10,
+    marginRight: 10,
+    fontSize: 16,
+    marginTop:15,
   },
   });
 export default DescribeElementView
