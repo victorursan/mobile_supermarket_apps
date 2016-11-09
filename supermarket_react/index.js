@@ -49,20 +49,20 @@ export default class supermarket_react extends Component {
               } else {
                   return (
                     <TouchableHighlight onPress={() => navigator.pop()}>
-                      <Text>Back</Text>
+                      <Text style={styles.text}>Back</Text>
                     </TouchableHighlight>); 
               }},
             RightButton: (route, navigator, index, navState) => { 
               if (route.index === 0) {
                   return (
                     <TouchableHighlight onPress={() => navigator.push(routes[1])}>
-                      <Text>+</Text>
+                      <Text style={styles.text}>+</Text>
                     </TouchableHighlight>);
               } else {
                 return null;
               }},
          Title: (route, navigator, index, navState) =>
-           { return (<Text>{route.title}</Text>); },
+           { return (<Text style={styles.text}>{route.title}</Text>); },
        }}
        style={{backgroundColor: 'gray'}}
      />
@@ -74,7 +74,12 @@ export default class supermarket_react extends Component {
 }
 
 const styles = StyleSheet.create({
-  
+  text: {
+    marginLeft: 10,
+    marginRight: 10,
+    fontSize: 16,
+    marginTop:15,
+  },
 });
 
 AppRegistry.registerComponent('supermarket_react', () => supermarket_react);

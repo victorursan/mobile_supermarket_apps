@@ -7,6 +7,8 @@ import {
   StyleSheet,
 } from 'react-native'
 
+import Communications from 'react-native-communications';
+
 class AddElementView extends Component {
 
   constructor(props) {
@@ -17,7 +19,7 @@ class AddElementView extends Component {
     this.state.price = ''
     this.state.description = ''
   }
-
+  
   render() {
     return (
       <View style={styles.container}>
@@ -37,7 +39,7 @@ class AddElementView extends Component {
                   onChangeText={(description) => this.setState({description})}/>
           </View>
           <View>
-            <TouchableHighlight style={{height: 60 }} onPress={() => {
+            <TouchableHighlight style={styles.textInput} onPress={() => {
                 this.addElement()
                 this.props.navigator.pop()}}>
            <Text>Add</Text>
@@ -49,13 +51,18 @@ class AddElementView extends Component {
   
   addElement() {
      var newItem = {}
-        newItem.identifier = this.state.identifier
-        newItem.name = this.state.name
-        newItem.price = this.state.price
-        newItem.description = this.state.description
-         this.props.store.push(newItem);
-  }
+     newItem.identifier = this.state.identifier
+     newItem.name = this.state.name
+     newItem.price = this.state.price
+     newItem.description = this.state.description
+     this.props.store.push(newItem);
+     var body = "Elements:" + JSON.stringify(this.props.store) + "\n Product:" + JSON.stringify(newItem)
+     Communications.email(['victor.ursan@gmail.com'],null,null,'Added new Product', body)
+     
 }
+}
+
+
 const styles = StyleSheet.create({
   container: {
     top: 50,

@@ -45,7 +45,7 @@ import DescribeElementView from './DescribeElementView'
         style={styles.container}
         dataSource={this.state.dataSource}
         renderRow={(data) => 
-         (<TouchableHighlight 
+         ( <TouchableHighlight 
             onPress={() => this.props.navigator.push({component: DescribeElementView, title: "Describe Product", passProps: {store: this.props.store, element: data, navigator: this.props.navigator}, index: 2})}
             style={styles.containerRow}>
           <Text style={styles.text}>
