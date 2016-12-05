@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import supermarket_ios
+//@testable import supermarket_ios
 
 class supermarket_iosTests: XCTestCase {
     

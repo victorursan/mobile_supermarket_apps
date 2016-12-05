@@ -5,18 +5,26 @@ import {
   StyleSheet,
   Text,
   View,
-  ListView,
   TouchableHighlight,
 } from 'react-native'
 
 import DescribeElementView from './DescribeElementView'
+import { ListView } from 'realm/react-native'
+import realm from './realm';
 
- class SupermarketListView extends Component {
+class SupermarketListView extends Component {
   constructor(props) {
     super(props);
+    let elements = realm.objects('RealmProduct');
+//     this.realm = new Realm();
+//     this.realm = new Realm({schema:[RealmProduct]})
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2 });
+//     let elements = [ realm.objects('RealmProduct') ];
+    
+        alert("pictures: " + elements.description);
     this.state = {
-      dataSource: ds.cloneWithRows(this.props.store),
+      dataSource: ds.cloneWithRows(elements),
+      data: elements
     };
   }
    
@@ -66,14 +74,13 @@ const styles = StyleSheet.create({
   containerRow: {
     padding: 10,
     marginLeft: -10,
-    width: 500 
   },
   text: {
     marginLeft: 0,
     fontSize: 16,
   },
   separator: {
-    flex: 1,
+    flexGrow: 1,
     height: StyleSheet.hairlineWidth,
     backgroundColor: '#8E8E8E',
   },

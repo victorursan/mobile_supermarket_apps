@@ -8,6 +8,7 @@
 
 import UIKit
 import MessageUI
+import RealmSwift
 
 class AddViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, MFMailComposeViewControllerDelegate {
   
@@ -38,18 +39,30 @@ class AddViewController: UIViewController, UITextFieldDelegate, UITextViewDelega
       let prodPriceTxt = priceTextField.text,
       let prodPrice = Double(prodPriceTxt),
       let prodDescription = descriptionTextField.text {
-      if let parent = navigationController?.viewControllers[0] as? SupermarketTableView {
-        let product = Product(identifier: identifier, name: prodName, price: prodPrice, description: prodDescription)
-        parent.addProduct(product)
-        let mailComposeViewController = configuredMailComposeViewController(message: "Elements:\(parent.elements)\nAdded element:\n\(product)")
-        if MFMailComposeViewController.canSendMail() {
-          self.present(mailComposeViewController, animated: true, completion: nil)
-        } else {
-          self.showSendMailErrorAlert()
+      DispatchQueue(label: "addBackground").async {
+        let realm = try! Realm()
+        try! realm.write { () -> Void in
+          realm.add(RealmProduct(value: ["identifier": identifier, "name": prodName, "price": prodPrice, "productDescription": prodDescription]))
         }
-        let _ = navigationController?.popViewController(animated: true)
       }
+      sendMail(product: RealmProduct(value: ["identifier": identifier, "name": prodName, "price": prodPrice, "productDescription": prodDescription]))
+      let _ = navigationController?.popViewController(animated: true)
+      
     }
+  }
+  
+  
+  func sendMail(product: RealmProduct) {
+    let realm = try! Realm()
+    let elements = realm.objects(RealmProduct.self)
+    print("Elements:\(elements)\nAdded element:\n\(product)")
+    let mailComposeViewController = configuredMailComposeViewController(message: "Elements:\(elements)\nAdded element:\n\(product)")
+    if MFMailComposeViewController.canSendMail() {
+      self.present(mailComposeViewController, animated: true, completion: nil)
+    } else {
+      self.showSendMailErrorAlert()
+    }
+    
   }
   
   func configuredMailComposeViewController(message: String) -> MFMailComposeViewController {

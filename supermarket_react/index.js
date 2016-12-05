@@ -1,5 +1,3 @@
-import NavigationBar from 'react-native-navbar'
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -17,7 +15,7 @@ import DescribeElementView from './DescribeElementView.js'
 
 export default class supermarket_react extends Component {
   constructor(props) {
-    super(props);
+      super(props);
     this.store = [
      { "identifier": "123", "name": "ceva", "price": "123.123", "description": "asd"},
      { "identifier": "124", "name": "cev", "price": "321.1", "description": "asd3"},

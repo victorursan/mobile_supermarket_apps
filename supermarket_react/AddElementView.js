@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     top: 10,
     backgroundColor: 'blue',
     height: 30,
-    flex: 1,
+    flexBasis: 1,
   },
   text: {
     marginLeft: 10,

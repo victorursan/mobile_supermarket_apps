@@ -7,15 +7,15 @@
 //
 
 import UIKit
+import RealmSwift
 
 class DetailViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
-  var product: Product?
+  var product: RealmProduct?
   
   @IBOutlet weak var identifierTextField: UITextField!
   @IBOutlet weak var nameTextField: UITextField!
   @IBOutlet weak var priceTextField: UITextField!
   @IBOutlet weak var descriptionTextView: UITextView!
-  
   @IBOutlet weak var saveButton: UIButton!
   
   private var editMode = false
@@ -25,14 +25,14 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UITextViewDel
       identifierTextField.text = p.identifier
       nameTextField.text = p.name
       priceTextField.text = String(format:"%f", p.price)
-      descriptionTextView.text = p.description
+      descriptionTextView.text = p.productDescription
     }
     updateEditMode(false)
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    identifierTextField.isEnabled = false
     // Do any additional setup after loading the view.
   }
   
@@ -47,7 +47,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UITextViewDel
   }
   
   private func updateEditMode(_ enabled: Bool) {
-    identifierTextField.isEnabled = enabled
+    //    identifierTextField.isEnabled = enabled
     nameTextField.isEnabled = enabled
     priceTextField.isEnabled = enabled
     descriptionTextView.isEditable = enabled
@@ -65,12 +65,18 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UITextViewDel
       let prodPriceTxt = priceTextField.text,
       let prodPrice = Double(prodPriceTxt),
       let prodDescription = descriptionTextView.text {
-      if let parent = navigationController?.viewControllers[0] as? SupermarketTableView,
-        let oldProduct = product{
-        let newProduct = Product(identifier: identifier, name: prodName, price: prodPrice, description: prodDescription)
-        parent.updateProduct(oldProduct, newProduct: newProduct)
-        let _ = navigationController?.popViewController(animated: true)
+      
+      let product = RealmProduct(value: ["identifier": identifier, "name": prodName, "price": prodPrice, "productDescription": prodDescription])
+      DispatchQueue(label: "addBackground").async {
+        let realm = try! Realm()
+        try! realm.write { () -> Void in
+          realm.add(product, update: true)
+        }
       }
+      //        let newProduct = Product(identifier: identifier, name: prodName, price: prodPrice, description: prodDescription)
+      //        parent.updateProduct(oldProduct, newProduct: newProduct)
+      let _ = navigationController?.popViewController(animated: true)
+      
     }
   }
   /*

@@ -7,13 +7,43 @@
 //
 
 import UIKit
+import RealmSwift
 
 class SupermarketTableView: UITableViewController {
   
-  var elements: [Product] = [Product]()
+  //  var elements: [Product] = [Product]()
+  
+  
+  var lists: Results<RealmProduct>!
+  var notificationToken: NotificationToken!
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    Realm.Configuration.defaultConfiguration.deleteRealmIfMigrationNeeded = true
+    let realm = try! Realm()
+    lists = realm.objects(RealmProduct.self)
+    
+    notificationToken = lists.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
+      guard let tableView = self?.tableView else { return }
+      switch changes {
+      case .initial:
+        // Results are now populated and can be accessed without blocking the UI
+        tableView.reloadData()
+        break
+      case .update(_, let deletions, let insertions, let modifications):
+        // Query results have changed, so apply them to the UITableView
+        tableView.beginUpdates()
+        tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+        tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}), with: .automatic)
+        tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),with: .automatic)
+        tableView.endUpdates()
+        break
+      case .error(let error):
+        // An error occurred while opening the Realm file on the background worker thread
+        fatalError("\(error)")
+        break
+      }
+    }
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = false
@@ -36,34 +66,23 @@ class SupermarketTableView: UITableViewController {
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     // #warning Incomplete implementation, return the number of rows
-    return elements.count
+    return lists.count
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "supermarketCell", for: indexPath)
-    let currentProduct = elements[indexPath.row]
+    let currentProduct = lists[indexPath.row]
     cell.textLabel?.text = "Name: \(currentProduct.name)"
     cell.detailTextLabel?.text = "Price: \(String(format:"%f", currentProduct.price))"
     
     return cell
   }
   
-  func addProduct(_ product: Product) {
-    elements.append(product)
-    tableView.reloadData()
-  }
-  
-  func updateProduct(_ oldProduct: Product, newProduct: Product) {
-    elements = elements.filter{$0 != oldProduct}
-    elements.append(newProduct)
-    tableView.reloadData()
-  }
-  
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if  segue.identifier == "DetailProduct",
       let destination = segue.destination as? DetailViewController,
       let blogIndex = tableView.indexPathForSelectedRow?.row {
-      destination.product = elements[blogIndex]
+      destination.product = lists[blogIndex]
     }
   }
   
@@ -75,17 +94,20 @@ class SupermarketTableView: UITableViewController {
    }
    */
   
-  /*
-   // Override to support editing the table view.
-   override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-   if editingStyle == .delete {
-   // Delete the row from the data source
-   tableView.deleteRows(at: [indexPath], with: .fade)
-   } else if editingStyle == .insert {
-   // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-   }
-   }
-   */
+  // Override to support editing the table view.
+  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    if editingStyle == .delete {
+      DispatchQueue(label: "updateBackground").async {
+        let realm = try! Realm()
+        let element = realm.objects(RealmProduct.self)[indexPath.row]
+        try! realm.write {
+          realm.delete(element)
+        }
+      }
+    } else if editingStyle == .insert {
+      // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }
+  }
   
   /*
    // Override to support rearranging the table view.
@@ -111,5 +133,9 @@ class SupermarketTableView: UITableViewController {
    // Pass the selected object to the new view controller.
    }
    */
+  
+  deinit {
+    notificationToken.stop()
+  }
   
 }
