@@ -276,7 +276,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Victor Ursan";
 				TargetAttributes = {
 					57C021241DBD5E01000A420D = {
@@ -287,12 +287,14 @@
 					57C021381DBD5E01000A420D = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 94TWQJ7GSF;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 57C021241DBD5E01000A420D;
 					};
 					57C021431DBD5E01000A420D = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 94TWQJ7GSF;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 57C021241DBD5E01000A420D;
 					};
@@ -657,7 +659,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.victor.supermarket-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0.1;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -672,7 +674,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.victor.supermarket-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0.1;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

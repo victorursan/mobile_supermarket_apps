@@ -5,7 +5,10 @@ import {
   Text,
   TouchableHighlight,
   StyleSheet,
+  DatePickerIOS,
 } from 'react-native'
+
+import realm from './realm';
 
 class DescribeElementView extends Component {
 
@@ -15,8 +18,8 @@ class DescribeElementView extends Component {
     this.state = {}
     this.state.identifier = this.props.element.identifier
     this.state.name = this.props.element.name
-    this.state.price = this.props.element.price
-    this.state.description = this.props.element.description
+    this.state.price = this.props.element.price.toString()
+    this.state.description = this.props.element.productDescription
     this.state.edit = false
     this.state.value = 'Edit'
   }
@@ -27,7 +30,7 @@ class DescribeElementView extends Component {
         <Text style={styles.text}>Product</Text>
           <View>
             <Text style={styles.text}>identifier</Text>
-            <TextInput editable={this.state.edit} style={styles.textInput} value={this.state.identifier}
+            <TextInput editable={false} style={styles.textInput} value={this.state.identifier}
                   onChangeText={(identifier) => this.setState({identifier})}/>
              <Text style={styles.text}>name</Text>
              <TextInput editable={this.state.edit} style={styles.textInput} value={this.state.name}
@@ -54,17 +57,10 @@ class DescribeElementView extends Component {
     )
 }
   
-  updateElement() {
-    var i = this.props.store.length;
-    while ( i --> 0 ) {
-      if ( this.props.store[i].identifier == this.props.element.identifier ) {
-        this.props.store[i].identifier = this.state.identifier
-          this.props.store[i].name = this.state.name
-          this.props.store[i].price = this.state.price
-          this.props.store[i].description = this.state.description
-          break;
-      }    
-    } 
+  async updateElement() {
+    realm.write(() => {
+      realm.create('RealmProduct', {identifier: this.state.identifier, name: this.state.name, price: parseFloat(this.state.price), productDescription: this.state.description}, true);
+    })
   }
   
 }
@@ -72,6 +68,7 @@ const styles = StyleSheet.create({
   container: {
     top: 60,
     marginLeft: 0
+    
   },
   textInput: {
     height: 30,
@@ -90,6 +87,6 @@ const styles = StyleSheet.create({
     marginRight: 10,
     fontSize: 16,
     marginTop:15,
-  },
+  }
   });
 export default DescribeElementView

@@ -19,6 +19,7 @@ class SupermarketTableView: UITableViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    print(Realm.Configuration.defaultConfiguration.fileURL!)
     Realm.Configuration.defaultConfiguration.deleteRealmIfMigrationNeeded = true
     let realm = try! Realm()
     lists = realm.objects(RealmProduct.self)
@@ -97,13 +98,21 @@ class SupermarketTableView: UITableViewController {
   // Override to support editing the table view.
   override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
-      DispatchQueue(label: "updateBackground").async {
-        let realm = try! Realm()
-        let element = realm.objects(RealmProduct.self)[indexPath.row]
-        try! realm.write {
-          realm.delete(element)
+      let alertController = UIAlertController(title: "Delete", message: "Are you sure you want to delete the item ?", preferredStyle: .alert)
+      let yesAction = UIAlertAction(title: "Yes", style: .default, handler: {(alert: UIAlertAction) in
+        DispatchQueue(label: "updateBackground").async {
+          let realm = try! Realm()
+          let element = realm.objects(RealmProduct.self)[indexPath.row]
+          try! realm.write {
+            realm.delete(element)
+          }
         }
-      }
+        } );
+      let noAction = UIAlertAction(title: "NO", style: .default, handler: nil)
+      alertController.addAction(yesAction)
+      alertController.addAction(noAction)
+      present(alertController, animated: true, completion: nil)
+      
     } else if editingStyle == .insert {
       // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }

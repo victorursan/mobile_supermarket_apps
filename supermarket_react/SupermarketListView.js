@@ -12,55 +12,63 @@ import DescribeElementView from './DescribeElementView'
 import { ListView } from 'realm/react-native'
 import realm from './realm';
 
+import Swipeout from 'react-native-swipeout'
+
 class SupermarketListView extends Component {
   constructor(props) {
     super(props);
     let elements = realm.objects('RealmProduct');
-//     this.realm = new Realm();
-//     this.realm = new Realm({schema:[RealmProduct]})
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2 });
-//     let elements = [ realm.objects('RealmProduct') ];
-    
-        alert("pictures: " + elements.description);
+ 
+    realm.objects('RealmProduct').addListener((products, changes) => {
+      this.setState({dataSource: this.state.dataSource.cloneWithRows(products)})
+    });
     this.state = {
       dataSource: ds.cloneWithRows(elements),
       data: elements
     };
   }
-   
-   componentWillReceiveProps(nextProps) {
-     var newItems = [];
-     var i = nextProps.store.length;
-     while ( i --> 0 ) {
-        var newItem = {}
-        newItem.identifier = nextProps.store[i].identifier;
-        newItem.name = nextProps.store[i].name;
-        newItem.price = nextProps.store[i].price;
-        newItem.description = nextProps.store[i].description;
-        newItems.push(newItem);
-    }
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(
-          newItems
-      ),
-      loaded: true,
-    });
+  
+  async deleteProduct(product) {
+    realm.write(() => {
+      realm.delete(product)
+    })
   }
-
+   
+  renderRow(rowData) {
+    let swipeBtns = [{
+      text: 'Delete',
+      backgroundColor: 'red',
+      underlayColor: 'white',
+      onPress: () => { Alert.alert(
+            'Delete',
+            "Are You sure you want to delete: " + rowData.name,
+            [{text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
+            {text: 'OK', onPress: () => this.deleteProduct(rowData)}]
+          )}
+    }];
+      return (
+        <Swipeout right={swipeBtns}
+                     autoClose='true'
+                     backgroundColor= 'transparent'>
+           <TouchableHighlight 
+            onPress={() => this.props.navigator.push({component: DescribeElementView, title: "Describe Product", passProps: {store: this.props.store, element: rowData, navigator: this.props.navigator}, index: 2})}
+            style={styles.containerRow}>
+             <Text style={styles.text}>
+               Name: {rowData.name}   Price: {rowData.price}
+             </Text>
+            </TouchableHighlight>
+         </Swipeout>
+        )
+  }
+  
   render() {
     return (
       <ListView
         style={styles.container}
         dataSource={this.state.dataSource}
         renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator}/>}
-        renderRow={(data) => 
-         ( <TouchableHighlight 
-            onPress={() => this.props.navigator.push({component: DescribeElementView, title: "Describe Product", passProps: {store: this.props.store, element: data, navigator: this.props.navigator}, index: 2})}
-            style={styles.containerRow}>
-          <Text style={styles.text}>
-            Name: {data.name}   Price: {data.price}
-          </Text>
-          </TouchableHighlight>)}/>
+        renderRow={(data) => this.renderRow(data)}/>
     )
   }
 }

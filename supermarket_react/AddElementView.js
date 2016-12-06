@@ -8,6 +8,8 @@ import {
 } from 'react-native'
 
 import Communications from 'react-native-communications';
+import { ListView } from 'realm/react-native'
+import realm from './realm';
 
 class AddElementView extends Component {
 
@@ -48,15 +50,12 @@ class AddElementView extends Component {
         </View>)
   }
   
-  addElement() {
-     var newItem = {}
-     newItem.identifier = this.state.identifier
-     newItem.name = this.state.name
-     newItem.price = this.state.price
-     newItem.description = this.state.description
-     this.props.store.push(newItem);
-     var body = "Elements:" + JSON.stringify(this.props.store) + "\n Product:" + JSON.stringify(newItem)
-     Communications.email(['victor.ursan@gmail.com'], null, null, 'Added new Product', body)   
+  async addElement() {
+     var body = "Elements:" + JSON.stringify(this.props.store) + "\n Product:" + JSON.stringify(this.state)
+     Communications.email(['victor.ursan@gmail.com'], null, null, 'Added new Product', body)
+     realm.write(() => {
+      realm.create('RealmProduct', {identifier: this.state.identifier, name: this.state.name, price: parseFloat(this.state.price), productDescription: this.state.description});
+    });
   }
 }
 
