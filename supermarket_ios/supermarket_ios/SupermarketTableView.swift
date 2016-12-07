@@ -108,7 +108,7 @@ class SupermarketTableView: UITableViewController {
           }
         }
         } );
-      let noAction = UIAlertAction(title: "NO", style: .default, handler: nil)
+      let noAction = UIAlertAction(title: "No", style: .default, handler: nil)
       alertController.addAction(yesAction)
       alertController.addAction(noAction)
       present(alertController, animated: true, completion: nil)

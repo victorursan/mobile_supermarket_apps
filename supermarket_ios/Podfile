@@ -7,7 +7,8 @@ target 'supermarket_ios' do
 
   # Pods for supermarket_ios
   pod 'RealmSwift'
-
+  pod 'Charts', '~> 3.0'
+  
   target 'supermarket_iosTests' do
     inherit! :search_paths
     # Pods for testing

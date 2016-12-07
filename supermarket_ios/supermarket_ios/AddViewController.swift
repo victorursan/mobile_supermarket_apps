@@ -10,16 +10,24 @@ import UIKit
 import MessageUI
 import RealmSwift
 
-class AddViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, MFMailComposeViewControllerDelegate {
+class AddViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, MFMailComposeViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+
+
   
   @IBOutlet weak var identifierTextField: UITextField!
   @IBOutlet weak var nameTextField: UITextField!
   @IBOutlet weak var priceTextField: UITextField!
   @IBOutlet weak var descriptionTextField: UITextView!
+  var pickerView: UIPickerView = UIPickerView()
+  var elements: [String] = []
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    pickerView.dataSource = self
+    pickerView.delegate = self
     
+    elements = (1...1000).map { "\($0)" }
+    priceTextField.inputView = pickerView
     // Do any additional setup after loading the view.
   }
   
@@ -31,6 +39,22 @@ class AddViewController: UIViewController, UITextFieldDelegate, UITextViewDelega
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     view.endEditing(true)
     super.touchesBegan(touches, with: event)
+  }
+  
+  func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    return 1;
+  }
+  
+  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    return elements.count;
+  }
+  
+  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    return elements[row]
+  }
+  
+  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    priceTextField.text = elements[row]
   }
   
   @IBAction func saveButtonWasPressed(_ sender: UIButton) {
@@ -50,7 +74,6 @@ class AddViewController: UIViewController, UITextFieldDelegate, UITextViewDelega
       
     }
   }
-  
   
   func sendMail(product: RealmProduct) {
     let realm = try! Realm()
