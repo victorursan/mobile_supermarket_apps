@@ -2,18 +2,20 @@ import React, {Component} from "react";
 import {AppRegistry, Alert, StyleSheet, Text, View, TouchableHighlight} from "react-native";
 import DescribeElementView from "./DescribeElementView";
 import {ListView} from "realm/react-native";
-import realm from "./realm";
+import RealmProduct from "./realm";
 import Swipeout from "react-native-swipeout";
 
 class SupermarketListView extends Component {
     constructor(props) {
         super(props);
-        let elements = realm.objects('RealmProduct');
+        let elements =  []
+        this.realm = this.props.realm
+        this.elements =  this.realm.objects('RealmProduct');
+        this.realm.objects('RealmProduct').addListener((products, changes) => {
+              this.setState({dataSource: this.state.dataSource.cloneWithRows(products)})
+            });
         var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
-        realm.objects('RealmProduct').addListener((products, changes) => {
-            this.setState({dataSource: this.state.dataSource.cloneWithRows(products)})
-        });
         this.state = {
             dataSource: ds.cloneWithRows(elements),
             data: elements
@@ -21,8 +23,8 @@ class SupermarketListView extends Component {
     }
 
     async deleteProduct(product) {
-        realm.write(() => {
-            realm.delete(product)
+        this.realm.write(() => {
+            this.realm.delete(product)
         })
     }
 
@@ -45,7 +47,7 @@ class SupermarketListView extends Component {
                       autoClose='true'
                       backgroundColor='transparent'>
               <TouchableHighlight
-                  onPress={() => this.props.navigator.push({component: DescribeElementView, title: "Describe Product", passProps: {store: this.props.store, element: rowData, navigator: this.props.navigator}, index: 2})}
+                  onPress={() => this.props.navigator.push({component: DescribeElementView, title: "Describe Product", passProps: {realm: this.realm, store: this.props.store, element: rowData, navigator: this.props.navigator}, index: 2})}
                   style={styles.containerRow}>
                 <Text style={styles.text}>
                   Name: {rowData.name} Price: {rowData.price}

@@ -11,8 +11,8 @@ import RealmSwift
 import Charts
 
 class DetailViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
-  
   var product: RealmProduct?
+  var configuration: Realm.Configuration!
   
   @IBOutlet weak var identifierTextField: UITextField!
   @IBOutlet weak var nameTextField: UITextField!
@@ -38,7 +38,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UITextViewDel
     elements = (1...1000).map { "\($0)" }
     priceTextField.inputView = pickerView
     
-    let realm = try! Realm()
+    let realm = try! Realm(configuration: self.configuration)
     barchartElements = realm.objects(RealmProduct.self)
     
     setChart(product: product!)
@@ -136,7 +136,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UITextViewDel
       
       let product = RealmProduct(value: ["identifier": identifier, "name": prodName, "price": prodPrice, "productDescription": prodDescription])
       DispatchQueue(label: "addBackground").async {
-        let realm = try! Realm()
+        let realm = try! Realm(configuration: self.configuration)
         try! realm.write { () -> Void in
           realm.add(product, update: true)
         }

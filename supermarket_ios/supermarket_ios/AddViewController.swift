@@ -11,8 +11,7 @@ import MessageUI
 import RealmSwift
 
 class AddViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, MFMailComposeViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
-
-
+  var configuration: Realm.Configuration!
   
   @IBOutlet weak var identifierTextField: UITextField!
   @IBOutlet weak var nameTextField: UITextField!
@@ -64,7 +63,7 @@ class AddViewController: UIViewController, UITextFieldDelegate, UITextViewDelega
       let prodPrice = Double(prodPriceTxt),
       let prodDescription = descriptionTextField.text {
       DispatchQueue(label: "addBackground").async {
-        let realm = try! Realm()
+        let realm = try! Realm(configuration: self.configuration)
         try! realm.write { () -> Void in
           realm.add(RealmProduct(value: ["identifier": identifier, "name": prodName, "price": prodPrice, "productDescription": prodDescription]))
         }
@@ -76,7 +75,7 @@ class AddViewController: UIViewController, UITextFieldDelegate, UITextViewDelega
   }
   
   func sendMail(product: RealmProduct) {
-    let realm = try! Realm()
+    let realm = try! Realm(configuration: self.configuration)
     let elements = realm.objects(RealmProduct.self)
     print("Elements:\(elements)\nAdded element:\n\(product)")
     let mailComposeViewController = configuredMailComposeViewController(message: "Elements:\(elements)\nAdded element:\n\(product)")

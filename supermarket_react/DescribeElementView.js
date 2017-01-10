@@ -2,12 +2,12 @@ import React, {Component} from "react";
 import {View, Text, TouchableHighlight, StyleSheet, ART} from "react-native";
 import {PickerField, InputField, Form} from "react-native-form-generator";
 import BarChart from "react-native-chart";
-import realm from "./realm";
 
 class DescribeElementView extends Component {
     constructor(props) {
         super(props);
         this.state = {};
+        this.realm = this.props.realm
         this.state.identifier = this.props.element.identifier;
         this.state.name = this.props.element.name;
         this.state.price = this.props.element.price.toString();
@@ -17,7 +17,11 @@ class DescribeElementView extends Component {
         this.state.priceValues = {};
         this.range(1000).map((elem) => this.state.priceValues[elem] = elem.toString());
         this.state.chartData = [];
-        let elements = realm.objects('RealmProduct');
+
+        this.user = false;
+
+      let elements = this.realm.objects('RealmProduct');
+
         for (let i = 0; i < elements.length; i++) {
             this.state.chartData.push([elements[i].name, elements[i].price])
         }
@@ -75,8 +79,8 @@ class DescribeElementView extends Component {
     }
 
     async updateElement() {
-        realm.write(() => {
-            realm.create('RealmProduct', {
+        this.realm.write(() => {
+            this.realm.create('RealmProduct', {
                 identifier: this.state.identifier,
                 name: this.state.name,
                 price: parseFloat(this.state.price),

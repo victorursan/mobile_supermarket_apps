@@ -32,4 +32,16 @@ RealmProduct.schema = {
     },
 };
 
-export default new Realm({schema: [RealmProduct]});
+// var adminToken = 'ewoJImlkZW50aXR5IjogImFkbWluIiwKCSJhY2Nlc3MiOiBbInVwbG9hZCIsICJkb3dubG9hZCIsICJtYW5hZ2UiXQp9Cg==:jzrjyUFEJXA9xJUiA5XFntLeQNF0+bJDBKp4hW1Hr0cX6FPXFDFVMn60DzUgSnmdJLVKY0k/ZblOB3ymSFp+u8gqY6ui7topjYIiUwZ7lr0bZzB+c5KbHR93e/N+2NO7jFBnG3ZBm9ZPyOwbF0Nd0OoVcLiIgX1blfWb25EEQ8yGvR3o57VJWjwcsNhwZzRMobq/6aGhNu5dbzPL28PI9TBHV3BOxg/VUY451DT/OTmoD4SBp9l1GEJUnuN5d3fGvMk/s0E4/oLQ6FGSAjPJ+FRQcoPWfXAG89xFzEpkSMwTfcmjCJe+SjZj9dv0wfxHSHudXLf1NmL3yZAoEJbYoA=='  
+// var adminUser = Realm.Sync.User.adminUser(adminToken);
+// export default new Realm({
+//   sync: {
+//     user: adminUser,
+//     url: 'realm://127.0.0.1:9080/~/products12',
+//   },
+//   schema: [RealmProduct]
+// });
+
+export default RealmProduct
+
+// export default new Realm({schema: [RealmProduct]});

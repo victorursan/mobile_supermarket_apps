@@ -45,6 +45,9 @@
 		02676543A47406E2F0BBAEB7 /* Pods_supermarket_iosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_supermarket_iosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		47E29C27014D5DE479C33ECB /* Pods-supermarket_ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-supermarket_ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-supermarket_ios/Pods-supermarket_ios.debug.xcconfig"; sourceTree = "<group>"; };
 		57A2B32C1DC7ED4400199F7D /* SupermarketTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupermarketTableView.swift; sourceTree = "<group>"; };
+		57A478A11E2BD64000FFA14D /* supermarket_ios-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "supermarket_ios-Bridging-Header.h"; sourceTree = "<group>"; };
+		57A478A21E2BD64000FFA14D /* supermarket_iosTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "supermarket_iosTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		57A478A31E2BD64000FFA14D /* supermarket_iosUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "supermarket_iosUITests-Bridging-Header.h"; sourceTree = "<group>"; };
 		57C021251DBD5E01000A420D /* supermarket_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = supermarket_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57C021281DBD5E01000A420D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		57C0212A1DBD5E01000A420D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -148,6 +151,9 @@
 				57C021261DBD5E01000A420D /* Products */,
 				2ADF7838A54FC371F41CF539 /* Pods */,
 				ECC263E6A7FBCF87A5936FC3 /* Frameworks */,
+				57A478A11E2BD64000FFA14D /* supermarket_ios-Bridging-Header.h */,
+				57A478A21E2BD64000FFA14D /* supermarket_iosTests-Bridging-Header.h */,
+				57A478A31E2BD64000FFA14D /* supermarket_iosUITests-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -282,6 +288,7 @@
 					57C021241DBD5E01000A420D = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = Q2D6WUKGUE;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					57C021381DBD5E01000A420D = {
@@ -654,11 +661,14 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = Q2D6WUKGUE;
 				INFOPLIST_FILE = supermarket_ios/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.victor.supermarket-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "supermarket_ios-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -669,11 +679,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = Q2D6WUKGUE;
 				INFOPLIST_FILE = supermarket_ios/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.victor.supermarket-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "supermarket_ios-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -684,11 +696,14 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 94TWQJ7GSF;
 				INFOPLIST_FILE = supermarket_iosTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.victorursan.supermarket-iosTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "supermarket_iosTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/supermarket_ios.app/supermarket_ios";
 			};
@@ -700,11 +715,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 94TWQJ7GSF;
 				INFOPLIST_FILE = supermarket_iosTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.victorursan.supermarket-iosTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "supermarket_iosTests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/supermarket_ios.app/supermarket_ios";
 			};
@@ -715,11 +732,14 @@
 			baseConfigurationReference = EB5A34CD1A338611B33C6C0D /* Pods-supermarket_iosUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 94TWQJ7GSF;
 				INFOPLIST_FILE = supermarket_iosUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.victorursan.supermarket-iosUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "supermarket_iosUITests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = supermarket_ios;
 			};
@@ -730,11 +750,13 @@
 			baseConfigurationReference = BD7B38E15D98E5B99D16AAF3 /* Pods-supermarket_iosUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 94TWQJ7GSF;
 				INFOPLIST_FILE = supermarket_iosUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.victorursan.supermarket-iosUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "supermarket_iosUITests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = supermarket_ios;
 			};
